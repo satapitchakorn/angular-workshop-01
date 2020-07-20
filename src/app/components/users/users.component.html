@@ -15,7 +15,8 @@
             <ul>
                 <li *ngFor="let item of list; let n = index">
                     <ng-container *ngIf="item.value.isCheck">
-                        <s (click)="actionAt(item)">{{n+1}}. {{item.value.name}}</s>
+                        <label (click)="actionAt(item)" style="text-decoration: line-through;">{{n+1}}.
+                            {{item.value.name}}</label>
                     </ng-container>
                     <ng-container *ngIf="!item.value.isCheck">
                         <label (click)="actionAt(item)">{{n+1}}. {{item.value.name}}</label>
