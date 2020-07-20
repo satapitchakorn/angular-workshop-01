@@ -1,0 +1,27 @@
+<form [formGroup]="form">
+    <div class="card">
+        <div class="card-body">
+            First name: <input class="form-control" formControlName=firstname required />
+            Last name: <input class="form-control" formControlName=lastname />
+            <br />
+            <button class="btn btn-outline-success btn-block" type="submit" (click)=submit()>Save</button>
+            <br />
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-body">
+            <p>Count = {{count}} / {{list.length}}</p>
+            <ul>
+                <li *ngFor="let item of list; let n = index">
+                    <ng-container *ngIf="item.value.isCheck">
+                        <s (click)="actionAt(item)">{{n+1}}. {{item.value.name}}</s>
+                    </ng-container>
+                    <ng-container *ngIf="!item.value.isCheck">
+                        <label (click)="actionAt(item)">{{n+1}}. {{item.value.name}}</label>
+                    </ng-container>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>

@@ -1,18 +1,5 @@
+<app-users></app-users>
+
 <h1>{{title}}</h1>
 Score = {{score}}
 <br>
-<ul *ngIf="show">
-  <li *ngFor="let item of color">
-    {{item}}
-  </li>
-</ul>
-<form>
-  First name: <input (keyup)="inputName($event)" />
-  <h1>{{firstname}}</h1>
-  Last name: <input #lastName (keyup)="inputLastName(lastName.value)" />
-  <h1>{{lastname}}</h1>
-  <button class="btn btn-success" type="submit" (click)=submit($event)>Save</button>
-  <br />
-  
-  Result = {{name}}
-</form>
