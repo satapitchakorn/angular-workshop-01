@@ -1,26 +1,35 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="submit()">
     <div class="card">
         <div class="card-body">
-            First name: <input class="form-control" formControlName=firstname required />
-            Last name: <input class="form-control" formControlName=lastname />
+            First name:
+            <input class="form-control" formControlName=firstname required [ngClass]="{
+              'is-invalid': submitted && form.controls.firstname.errors}" (keydown)="$event.code != 'Space'" />
+            <div *ngIf="form.controls.firstname.errors" class="invalid-feedback">
+                <div *ngIf="form.controls.firstname.errors.required">
+                    First name is required
+                </div>
+            </div>
+            Last name:
+            <input matInput class="form-control" formControlName=lastname required [ngClass]="{
+              'is-invalid': submitted && form.controls.lastname.errors}" (keydown)="$event.code != 'Space'" />
+            <div *ngIf="form.controls.lastname.errors" class="invalid-feedback">
+                <div *ngIf="form.controls.lastname.errors.required">
+                    Last name is required
+                </div>
+            </div>
             <br />
-            <button class="btn btn-outline-success btn-block" type="submit" (click)=submit()>Save</button>
+            <button class="btn btn-outline-success btn-block" type="submit">Save</button>
             <br />
         </div>
     </div>
     <br />
     <div class="card">
         <div class="card-body">
-            <p>Count = {{count}} / {{list.length}}</p>
+            <p>Count = {{count}} / {{formArray.length}}</p>
             <ul>
-                <li *ngFor="let item of list; let n = index">
-                    <ng-container *ngIf="item.value.isCheck">
-                        <label (click)="actionAt(item)" style="text-decoration: line-through;">{{n+1}}.
-                            {{item.value.name}}</label>
-                    </ng-container>
-                    <ng-container *ngIf="!item.value.isCheck">
-                        <label (click)="actionAt(item)">{{n+1}}. {{item.value.name}}</label>
-                    </ng-container>
+                <li *ngFor="let user of formArray.controls; let i = index" [class.selected]="user.value.isCheck"
+                    (click)="actionAt(user)">
+                   {{i+1}}. {{ user.value.name }}
                 </li>
             </ul>
         </div>
